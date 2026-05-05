@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ETx Game Zone</title>
+<title>ETx Toolkit</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,38 +22,33 @@
     max-width: 1400px;
     width: 100%;
     background: transparent;
-    border-radius: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 0;
     overflow: hidden;
     position: relative;
-    min-height: 500px;
-    padding: 48px 0 48px 48px;
-  }
-
-  /* ── LEFT COLUMN ── */
-  .left {
-    padding: 0 40px 0 0;
-    z-index: 1;
+    min-height: 520px;
+    padding: 48px 0 48px 56px;
   }
 
   .left-watermark {
     position: absolute;
     font-family: 'Sora', sans-serif;
-    font-size: 130px;
+    font-size: 140px;
     font-weight: 800;
-    color: rgba(200, 210, 230, 0.45);
-    top: 40px;
-    left: 20%;
-    transform: translateY(0);
+    color: rgba(200, 210, 230, 0.3);
+    top: 30px;
+    left: 18%;
     white-space: nowrap;
-    letter-spacing: -3px;
+    letter-spacing: -4px;
     z-index: 0;
     pointer-events: none;
     line-height: 1;
   }
+
+  /* LEFT */
+  .left { padding: 0 48px 0 0; z-index: 1; }
 
   .badge {
     display: inline-flex;
@@ -63,22 +58,18 @@
     border: 1px solid #d4bbff;
     border-radius: 999px;
     padding: 7px 16px 7px 10px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
-
   .badge-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px; height: 7px;
     border-radius: 50%;
     background: #7c3aed;
-    opacity: 0.7;
     flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(124,58,237,0.6);
   }
-
   .badge-text {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 11.5px;
-    font-weight: 700;
+    font-size: 11.5px; font-weight: 700;
     color: #7c3aed;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -88,47 +79,39 @@
     font-family: 'Sora', sans-serif;
     font-size: clamp(60px, 7.5vw, 96px);
     font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 14px;
-  }
-
-  h1 .black { display: block; color: #0b1730; }
-
-  h1 .pink {
-    display: block;
-    background: linear-gradient(135deg, #c040a0, #a04297);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  h1 .blue {
-    display: block;
-    background: linear-gradient(135deg, #0a4a8f, #1c7bd1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
   }
 
   .subtitle {
     font-family: 'Sora', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 18px; font-weight: 700;
     color: #0a4a8f;
     margin-bottom: 14px;
-    letter-spacing: -0.005em;
   }
 
   .body-text {
     font-size: 15.5px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: #475066;
     margin-bottom: 28px;
-    max-width: 520px;
+    max-width: 480px;
   }
-
   .body-text b { color: #0b1730; font-weight: 600; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f4f6fb;
+    border: 1px solid #e2e8f4;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12.5px; font-weight: 600;
+    color: #374060;
+  }
 
   .cta {
     display: inline-flex;
@@ -137,114 +120,279 @@
     background: #0a4a8f;
     color: #fff;
     border: none;
-    border-radius: 10px;
-    padding: 14px 24px;
+    border-radius: 12px;
+    padding: 15px 28px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14.5px;
-    font-weight: 600;
+    font-size: 14.5px; font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     letter-spacing: 0.01em;
-    transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 10px 22px -10px rgba(10,74,143,.6);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 12px 28px -8px rgba(10,58,130,.5);
   }
-
-  .cta:hover { background: #0d5aa8; transform: translateY(-1px); }
-  .cta:active { transform: translateY(0); }
-
-  .cta-arrow {
-    display: inline-flex;
-    transition: transform 0.25s;
-  }
-  .cta:hover .cta-arrow { transform: translateX(4px); }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -8px rgba(10,58,130,.6); }
+  .cta-arrow { display: inline-flex; transition: transform 0.25s; }
+  .cta:hover .cta-arrow { transform: translateX(5px); }
 
   /* ── RIGHT COLUMN ── */
   .right {
     position: relative;
-    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 520px;
     overflow: hidden;
+    margin-left: -60px;
   }
 
   .bg-scene {
     position: relative;
-    width: 500px;
-    height: 420px;
+    width: 540px; height: 520px;
     flex-shrink: 0;
+    overflow: hidden;
+    background: transparent;
   }
 
-  /* large orbit rings */
-  .bg-ring {
+  #particle-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+  }
+
+  /* Hex grid */
+  .hex-bg {
+    position: absolute; inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V17L28 1l28 16v33z' fill='none' stroke='%230a4a8f' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 56px 100px;
+    z-index: 0;
+  }
+
+  /* Ambient blob */
+  .blob {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 340px; height: 340px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 40% 40%, rgba(34,197,94,0.11), rgba(22,163,74,0.07) 55%, transparent 80%);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: blob-morph 10s ease-in-out infinite;
+    pointer-events: none; z-index: 0;
+  }
+  @keyframes blob-morph {
+    0%,100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25%      { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    50%      { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+    75%      { border-radius: 67% 33% 47% 53% / 37% 20% 80% 63%; }
+  }
+
+  /* Central orb */
+  .orb {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+      rgba(0,230,255,0.95),
+      rgba(30,100,255,0.75) 40%,
+      rgba(120,40,255,0.45) 70%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 40px rgba(34,197,94,0.7),
+      0 0 80px rgba(22,163,74,0.35),
+      0 0 140px rgba(16,185,129,0.18);
+    animation: orb-breathe 4s ease-in-out infinite;
+    z-index: 5;
+  }
+  .orb::before {
+    content: '';
+    position: absolute; inset: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 28%, rgba(255,255,255,0.75), transparent 55%);
+  }
+  .orb-label {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Sora', sans-serif;
+    font-size: 20px; font-weight: 800;
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.9);
+    z-index: 6; pointer-events: none;
+  }
+  @keyframes orb-breathe {
+    0%,100% { transform: translate(-50%,-50%) scale(1);    box-shadow: 0 0 40px rgba(34,197,94,.7),  0 0 80px rgba(22,163,74,.35),  0 0 140px rgba(16,185,129,.18); }
+    50%      { transform: translate(-50%,-50%) scale(1.09); box-shadow: 0 0 65px rgba(74,222,128,.95), 0 0 130px rgba(34,197,94,.55), 0 0 200px rgba(16,185,129,.28); }
+  }
+
+  /* Orbit rings */
+  .orbit-ring {
     position: absolute;
     top: 50%; left: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid rgba(100, 160, 255, 0.2);
+    animation: orbit-spin linear infinite;
+    z-index: 3;
   }
-  .bg-ring-1 { width: 240px; height: 240px; border-color: rgba(139, 92, 246, 0.2); }
-  .bg-ring-2 { width: 360px; height: 360px; border-color: rgba(100, 160, 255, 0.15); }
-  .bg-ring-3 { width: 480px; height: 480px; border-color: rgba(139, 92, 246, 0.08); }
+  .orbit-ring::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+  }
+  .or1 { width: 220px; height: 220px; border: 1px solid rgba(74,222,128,0.35); animation-duration: 7s; }
+  .or1::before { width: 11px; height: 11px; background: #4ade80; box-shadow: 0 0 12px #4ade80, 0 0 24px #4ade80; }
 
-  /* diagonal line across ring like in reference */
-  .bg-line {
+  .or2 { width: 320px; height: 320px; border: 1px solid rgba(22,163,74,0.25); animation-duration: 13s; animation-direction: reverse; }
+  .or2::before { width: 9px; height: 9px; top: -4px; background: #16a34a; box-shadow: 0 0 10px #16a34a, 0 0 22px #16a34a; }
+  .or2-dot2 {
+    position: absolute;
+    width: 7px; height: 7px; border-radius: 50%;
+    bottom: -3px; left: 50%; transform: translateX(-50%);
+    background: #86efac; box-shadow: 0 0 10px #86efac, 0 0 20px #86efac;
+  }
+
+  .or3 { width: 440px; height: 440px; border: 1px dashed rgba(34,197,94,0.15); animation-duration: 24s; }
+  .or3::before { width: 8px; height: 8px; top: -4px; background: #059669; box-shadow: 0 0 10px #059669, 0 0 20px #059669; }
+
+  @keyframes orbit-spin {
+    from { transform: translate(-50%,-50%) rotate(0deg); }
+    to   { transform: translate(-50%,-50%) rotate(360deg); }
+  }
+
+  /* Sonar pings */
+  .ping-wrap {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; pointer-events: none;
+  }
+  .ping {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(74,222,128,0.6);
+    animation: sonar 3.5s ease-out infinite;
+  }
+  .ping:nth-child(2) { animation-delay: 1.15s; }
+  .ping:nth-child(3) { animation-delay: 2.3s; }
+  @keyframes sonar {
+    0%   { transform: translate(-50%,-50%) scale(1);   opacity: 0.8; }
+    100% { transform: translate(-50%,-50%) scale(3.1); opacity: 0; }
+  }
+
+  /* Glass tool cards */
+  .tool-card {
+    position: absolute;
+    background: rgba(255,255,255,0.84);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(180,210,255,0.55);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 9px;
+    box-shadow: 0 8px 28px rgba(0,80,200,0.1), 0 2px 8px rgba(0,0,0,0.05);
+    z-index: 6; white-space: nowrap;
+  }
+  .tc-icon { font-size: 18px; line-height: 1; }
+  .tc-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; color: #1a2a4a; }
+  .tc-sub   { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9.5px; font-weight: 500; color: #7a8eaa; display: block; margin-top: 1px; }
+
+  .tc1 { top: 28px;    left: 18px;  animation: tc-f1 5s ease-in-out infinite; }
+  .tc2 { top: 44px;    right: 16px; animation: tc-f2 6.5s ease-in-out infinite 1s; }
+  .tc3 { bottom: 72px; left: 16px;  animation: tc-f1 5.8s ease-in-out infinite 0.5s; }
+  .tc4 { bottom: 44px; right: 18px; animation: tc-f2 7s ease-in-out infinite 1.8s; }
+
+  @keyframes tc-f1 {
+    0%,100% { transform: translateY(0px) rotate(-1deg); }
+    50%      { transform: translateY(-10px) rotate(0deg); }
+  }
+  @keyframes tc-f2 {
+    0%,100% { transform: translateY(0px) rotate(1deg); }
+    50%      { transform: translateY(-10px) rotate(0deg); }
+  }
+
+  /* Data scan lines */
+  .data-line {
+    position: absolute; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, transparent, rgba(34,197,94,0.75), transparent);
+    animation: data-scan ease-in-out infinite;
+    z-index: 2; pointer-events: none;
+  }
+  .dl1 { width: 80px; top: 36%; left: 4%;  animation-duration: 3s;   animation-delay: 0s; }
+  .dl2 { width: 55px; top: 62%; right: 6%; animation-duration: 4s;   animation-delay: 1.2s; }
+  .dl3 { width: 65px; top: 20%; left: 10%; animation-duration: 3.5s; animation-delay: 0.7s; }
+  @keyframes data-scan {
+    0%,100% { opacity: 0.3; transform: scaleX(1); }
+    50%      { opacity: 1;   transform: scaleX(1.4); }
+  }
+
+  /* ── ORBITING BLOCKS ── */
+  .orbit-block-track {
     position: absolute;
     top: 50%; left: 50%;
-    width: 580px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.12), transparent);
-    transform: translate(-50%, -50%) rotate(-35deg);
-  }
-
-  /* small floating rounded squares */
-  .sq {
-    position: absolute;
-    border-radius: 18px;
-    border: 1.5px solid rgba(70, 200, 0, 0.35);
-    background: rgba(100, 220, 20, 0.12);
-  }
-
-  .sq1 { width: 70px;  height: 70px;  top: 20px;  left: 20px;  animation: fl1 4.5s ease-in-out infinite; }
-  .sq2 { width: 55px;  height: 55px;  top: 10px;  right: 30px; animation: fl2 5.5s ease-in-out infinite 0.7s; }
-  .sq3 { width: 80px;  height: 80px;  bottom: 40px; right: 20px; animation: fl3 5s ease-in-out infinite 1.2s; }
-  .sq4 { width: 50px;  height: 50px;  bottom: 60px; left: 10px;  animation: fl4 6s ease-in-out infinite 0.4s; }
-  .sq5 { width: 42px;  height: 42px;  top: 45%;   left: -10px;  animation: fl1 4s ease-in-out infinite 1.8s; }
-  .sq6 { width: 48px;  height: 48px;  top: 30%;   right: -5px;  animation: fl2 5.2s ease-in-out infinite 0.9s; }
-
-  @keyframes fl1 { 0%,100%{transform:translateY(0px)}   50%{transform:translateY(-14px)} }
-  @keyframes fl2 { 0%,100%{transform:translateY(0px)}   50%{transform:translateY(-10px)} }
-  @keyframes fl3 { 0%,100%{transform:translateY(0px)}   50%{transform:translateY(-18px)} }
-  @keyframes fl4 { 0%,100%{transform:translateY(0px)}   50%{transform:translateY(-12px)} }
-
-  .img-circle {
-    position: absolute;
-    width: 340px;
-    height: 340px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-55%, -50%);
-    object-fit: cover;
     border-radius: 50%;
-    z-index: 1;
+    transform: translate(-50%, -50%);
+    animation: orbit-spin linear infinite;
+    pointer-events: none;
   }
 
-  .img-characters {
+  /* Each track holds one block positioned at its edge */
+  .orbit-block {
     position: absolute;
-    width: 520px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-45%, -52%);
-    object-fit: contain;
-    z-index: 2;
+    border-radius: 14px;
+    border: 1.5px solid rgba(70, 200, 0, 0.35);
+    background: rgba(120, 230, 30, 0.12);
+    /* counter-rotate so block stays upright */
+    animation: block-counter linear infinite;
   }
 
+  /* Track sizes & speeds */
+  .obt1 { width: 200px; height: 200px; animation-duration: 10s; }
+  .obt2 { width: 290px; height: 290px; animation-duration: 16s; animation-direction: reverse; }
+  .obt3 { width: 390px; height: 390px; animation-duration: 22s; }
+  .obt4 { width: 290px; height: 290px; animation-duration: 19s; animation-direction: reverse; animation-delay: -6s; }
+  .obt5 { width: 390px; height: 390px; animation-duration: 26s; animation-direction: reverse; animation-delay: -10s; }
+  .obt6 { width: 200px; height: 200px; animation-duration: 13s; animation-direction: reverse; animation-delay: -4s; }
+
+  /* Block sizes */
+  .ob-sm { width: 44px;  height: 44px; }
+  .ob-md { width: 60px;  height: 60px; }
+  .ob-lg { width: 76px;  height: 76px; }
+
+  /* Position block at the top of its circular track */
+  .orbit-block-track .orbit-block {
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .obt1 .orbit-block { top: -22px; }
+  .obt2 .orbit-block { top: -30px; }
+  .obt3 .orbit-block { top: -38px; }
+  .obt4 .orbit-block { top: -22px; }
+  .obt5 .orbit-block { top: -30px; }
+  .obt6 .orbit-block { top: -25px; }
+
+  /* Counter-rotate durations must match track durations */
+  .obt1 .orbit-block { animation-duration: 10s; }
+  .obt2 .orbit-block { animation-duration: 16s; animation-direction: reverse; }
+  .obt3 .orbit-block { animation-duration: 22s; }
+  .obt4 .orbit-block { animation-duration: 19s; animation-direction: reverse; animation-delay: -6s; }
+  .obt5 .orbit-block { animation-duration: 26s; animation-direction: reverse; animation-delay: -10s; }
+  .obt6 .orbit-block { animation-duration: 13s; animation-direction: reverse; animation-delay: -4s; }
+
+  @keyframes block-counter {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(-360deg); }
+  }
 </style>
 </head>
 <body>
 
 <section class="hero">
-
   <div class="left-watermark">TOOLKITS</div>
 
   <!-- LEFT -->
@@ -256,7 +404,8 @@
       </div>
 
       <h1>
-        <span style="display:inline; color:#0b1730;">ETx </span><span style="display:inline; background: linear-gradient(135deg, #e035a0, #c0257a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Toolkits</span>
+        <span style="display:block; color:#0b1730;">ETx</span>
+        <span style="display:block; background: linear-gradient(135deg, #e035a0, #c0257a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Toolkits</span>
       </h1>
 
       <p class="subtitle">Your work, made easier.</p>
@@ -278,22 +427,111 @@
   </div>
 
   <!-- RIGHT -->
-      <div class="right">
+  <div class="right">
     <div class="bg-scene">
-      <div class="bg-ring bg-ring-1"></div>
-      <div class="bg-ring bg-ring-2"></div>
-      <div class="bg-ring bg-ring-3"></div>
-      <div class="bg-line"></div>
-      <div class="sq sq1"></div>
-      <div class="sq sq2"></div>
-      <div class="sq sq3"></div>
-      <div class="sq sq4"></div>
-      <div class="sq sq5"></div>
-      <div class="sq sq6"></div>
+      <canvas id="particle-canvas"></canvas>
+      <div class="hex-bg"></div>
+      <div class="blob"></div>
+
+      <div class="ping-wrap">
+        <div class="ping"></div>
+        <div class="ping"></div>
+        <div class="ping"></div>
+      </div>
+
+      <div class="orbit-ring or1"></div>
+      <div class="orbit-ring or2"><div class="or2-dot2"></div></div>
+      <div class="orbit-ring or3"></div>
+
+
+      <div class="tool-card tc1">
+        <span class="tc-icon">⚡</span>
+        <div><span class="tc-label">Quick Launch</span><span class="tc-sub">No setup needed</span></div>
+      </div>
+      <div class="tool-card tc2">
+        <span class="tc-icon">🔒</span>
+        <div><span class="tc-label">Secure Access</span><span class="tc-sub">SSO enabled</span></div>
+      </div>
+      <div class="tool-card tc3">
+        <span class="tc-icon">🤖</span>
+        <div><span class="tc-label">AI Powered</span><span class="tc-sub">Built by ETAD</span></div>
+      </div>
+      <div class="tool-card tc4">
+        <span class="tc-icon">📊</span>
+        <div><span class="tc-label">Analytics</span><span class="tc-sub">Real-time insights</span></div>
+      </div>
+
+      <div class="data-line dl1"></div>
+      <div class="data-line dl2"></div>
+      <div class="data-line dl3"></div>
+
+      <!-- Orbiting blocks -->
+      <div class="orbit-block-track obt1"><div class="orbit-block ob-sm"></div></div>
+      <div class="orbit-block-track obt2"><div class="orbit-block ob-md"></div></div>
+      <div class="orbit-block-track obt3"><div class="orbit-block ob-lg"></div></div>
+      <div class="orbit-block-track obt4"><div class="orbit-block ob-sm"></div></div>
+      <div class="orbit-block-track obt5"><div class="orbit-block ob-md"></div></div>
+      <div class="orbit-block-track obt6"><div class="orbit-block ob-sm"></div></div>
     </div>
   </div>
-
 </section>
 
+<script>
+  const canvas = document.getElementById('particle-canvas');
+  const ctx    = canvas.getContext('2d');
+  const scene  = canvas.parentElement;
+
+  function resize() { canvas.width = scene.offsetWidth; canvas.height = scene.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = Array.from({ length: 60 }, () => ({
+    x: Math.random() * 540,
+    y: Math.random() * 520,
+    r: Math.random() * 2 + 0.5,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.35,
+    alpha: Math.random() * 0.5 + 0.15,
+    hue: [115, 130, 145, 160][Math.floor(Math.random() * 4)],
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const d = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+        if (d < 95) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(34,197,94,${0.22 * (1 - d / 95)})`;
+          ctx.lineWidth = 1.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+      g.addColorStop(0, `hsla(${p.hue},90%,72%,${p.alpha * 0.4})`);
+      g.addColorStop(1, 'transparent');
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fillStyle = g; ctx.fill();
+
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${p.hue},90%,75%,${p.alpha})`; ctx.fill();
+
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      p.alpha += (Math.random() - 0.5) * 0.018;
+      p.alpha = Math.max(0.08, Math.min(0.72, p.alpha));
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
 </body>
 </html>
